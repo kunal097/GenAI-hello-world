@@ -29,6 +29,8 @@ messages.append(system_prompt.to_string())
 human_message = st.chat_input("Ask any topic you want to learn")
 
 if(human_message):
+    with st.chat_message("user"):
+     st.write(human_message)
     human_prompt = ChatPromptTemplate.from_template(BREIF_TOPIC if explanation_type == 'Breif' else DETAILED_TOPIC).invoke({"topic" : human_message, "language" : programming_language})
     messages.append(human_prompt.to_string())
 
@@ -36,7 +38,8 @@ if(human_message):
 
     messages.append(AIMessage(result))
 
-    st.write(result)
+    with st.chat_message("ai"):
+     st.write(result)
 
 
 
